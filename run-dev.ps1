@@ -9,11 +9,15 @@ Set-Location $PSScriptRoot\backend
 # Set Python path to include backend directory
 $env:PYTHONPATH = "$PSScriptRoot\backend"
 
+# Set environment to development so config.py loads .env file
+$env:ENV = "development"
+
 # Activate virtual environment if it exists
 if (Test-Path "$PSScriptRoot\.venv\Scripts\Activate.ps1") {
     Write-Host "Activating virtual environment..." -ForegroundColor Yellow
     & "$PSScriptRoot\.venv\Scripts\Activate.ps1"
-} else {
+}
+else {
     Write-Host "WARNING: Virtual environment not found at .venv\" -ForegroundColor Red
     Write-Host "Please run: python -m venv .venv" -ForegroundColor Yellow
     exit 1
