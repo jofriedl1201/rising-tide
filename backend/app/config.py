@@ -35,8 +35,19 @@ IS_DEVELOPMENT = ENV == "development"
 if IS_DEVELOPMENT:
     try:
         from dotenv import load_dotenv
-        load_dotenv()
-        logger.info("Development mode: Loaded .env file")
+        from pathlib import Path
+        
+        # Look for .env in project root (two levels up from this file)
+        # This file is at: backend/app/config.py
+        # Project root is at: ../../
+        project_root = Path(__file__).parent.parent.parent
+        env_file = project_root / ".env"
+        
+        if env_file.exists():
+            load_dotenv(env_file)
+            logger.info(f"Development mode: Loaded .env file from {env_file}")
+        else:
+            logger.warning(f"Development mode: .env file not found at {env_file}")
     except ImportError:
         logger.warning("python-dotenv not installed, continuing without .env")
 else:
