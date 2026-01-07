@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+fastapi-sso
+Authlib
+itsdangerous
+sqlalchemy
+psycopg2-binary
+stripe
+pydantic
+python-dotenv
+boto3

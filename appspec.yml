@@ -1,0 +1,27 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/rising-tide
+    overwrite: true
+hooks:
+  BeforeInstall:
+    - location: scripts/codedeploy/before_install.sh
+      timeout: 300
+      runas: ubuntu
+  AfterInstall:
+    - location: scripts/codedeploy/after_install.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/codedeploy/application_start.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: scripts/codedeploy/application_stop.sh
+      timeout: 60
+      runas: ubuntu
+  ValidateService:
+    - location: scripts/codedeploy/validate_service.sh
+      timeout: 300
+      runas: ubuntu
